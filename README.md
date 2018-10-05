@@ -1,2 +1,2 @@
-A countdown for the day of HelloWorld.
-# day_of
+# Info Screen for the Day of CUhackit's HelloWorld
+## A 'Hackathon Lite' for those new to hacking
