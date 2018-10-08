@@ -2,15 +2,13 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-05 15:56:53
+* @Last Modified time: 2018-10-08 11:44:53
 */
-// var startTime = (new Date(2018, 2, 10, 10)).getTime();
-// var endTime = (new Date(2018, 2, 11, 10)).getTime();
+var startTime = (new Date(2018, 9, 13, 8)).getTime();
+var endTime = (new Date(2018, 9, 13, 20)).getTime();
 
 
- // for testing
-var startTime = (new Date(2018, 9, 5, 8)).getTime();
-var endTime = (new Date(2018, 9, 8, 8)).getTime();
+ // for testinvar endTime = (new Date(2018, 9, 13, 20)).getTime();
 
 
 
@@ -60,7 +58,7 @@ var c = document.getElementById("clock"),
     height = c.height;
 
 // Colors
-var gridLineColor = "#333";
+var gridLineColor = "#FFF";
 
 /*
   This gradient is present where the top of the canvas is lighter than the bottom
@@ -90,8 +88,17 @@ function getCurrentGradient() {
 
 
 // First object controls the number/size of each digit
-var digit = { count: 8, pairs: 4, width: 3, height: 5 };
 // Blank spaces between digits/sides
+var digit;
+if (progress.during())
+{
+  digit = { count: 6, pairs: 3, width: 3, height: 5 };
+}
+else 
+{
+  digit = { count: 8, pairs: 4, width: 3, height: 5 };
+}
+
 var space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
 // Set height of canvas grid in rows
 var rows = space.topBottom * 2 + digit.height;
@@ -247,11 +254,11 @@ function writeDigitAt(number, numberPos) {
     var wasChange = false;
 
     for (y = 0; y < digit.height; y++) {
-    	for (x = 0; x < digit.width; x++) {
-    	    if (grid[base[0] + y][base[1] + x] === numberSpec[y][x]) { continue; }
-    	    grid[base[0] + y][base[1] + x] = numberSpec[y][x];
-    	    wasChange = true;
-    	}
+      for (x = 0; x < digit.width; x++) {
+          if (grid[base[0] + y][base[1] + x] === numberSpec[y][x]) { continue; }
+          grid[base[0] + y][base[1] + x] = numberSpec[y][x];
+          wasChange = true;
+      }
     }
     return wasChange;
 }
@@ -260,26 +267,28 @@ function writeDigitAt(number, numberPos) {
 function logGrid() {
     var gridToText = "";
     for (y = 0; y < grid.length; y++) {
-	for (x = 0; x < grid[y].length; x++) {
-	    gridToText += (grid[y][x] == 0 ? '_' : 'G');
-	}
-	gridToText += "\n";
+      for (x = 0; x < grid[y].length; x++) {
+        gridToText += (grid[y][x] == 0 ? '_' : 'G');
+      }
+      gridToText += "\n";
     }
     console.log(gridToText);
 }
 
 function updateGrid() {
-    var clockTime = secondsLeft();
-    var seconds = clockTime % 60;
-    clockTime = Math.floor(clockTime / 60);
-    var minutes = clockTime % 60;
-    clockTime = Math.floor(clockTime / 60);
-    var hours = clockTime % 24;
-    clockTime = Math.floor(clockTime / 24);
-    var days = clockTime;
+  var clockTime = secondsLeft();
+  var seconds = clockTime % 60;
+  clockTime = Math.floor(clockTime / 60);
+  var minutes = clockTime % 60;
+  clockTime = Math.floor(clockTime / 60);
+  var hours = clockTime % 24;
+  clockTime = Math.floor(clockTime / 24);
+  var days = clockTime;
 
-
-    var wasChange = writeDigitAt(Math.floor(days / 10), 0);
+  var wasChange;
+  if (!progress.during())
+  {
+    wasChange = writeDigitAt(Math.floor(days / 10), 0);
     wasChange = writeDigitAt(days % 10, 1) || wasChange;
 
     wasChange = writeDigitAt(Math.floor(hours / 10), 2) || wasChange;
@@ -290,6 +299,18 @@ function updateGrid() {
 
     wasChange = writeDigitAt(Math.floor(seconds / 10), 6) || wasChange;
     wasChange = writeDigitAt(seconds % 10, 7) || wasChange;
+  }
+  else
+  {
+    wasChange = writeDigitAt(Math.floor(hours / 10), 0) || wasChange;
+    wasChange = writeDigitAt(hours % 10, 1) || wasChange;
+
+    wasChange = writeDigitAt(Math.floor(minutes / 10), 2) || wasChange;
+    wasChange = writeDigitAt(minutes % 10, 3) || wasChange;
+
+    wasChange = writeDigitAt(Math.floor(seconds / 10), 4) || wasChange;
+    wasChange = writeDigitAt(seconds % 10, 5) || wasChange;
+  }
 
 //    logGrid();
     return wasChange;
@@ -300,20 +321,21 @@ const boxHeight = getCanvasCoords(1,1)[0];
 function drawBox(y, x) {
     const topLeft = getCanvasCoords(y, x);
     ctx.beginPath();
-    ctx.rect(topLeft[1], topLeft[0], boxWidth, boxHeight);
+    ctx.rect(topLeft[1]+0.5, topLeft[0]+0.5, boxWidth+0.5, boxHeight+0.5);
     ctx.fill();
 }
 
 function drawNumbers() {
-    // draw the boxes
-    for (y = 0; y < rows; y++) {
-	for (x = 9; x < columns; x++) {
-	    if (grid[y][x] == 1) {
-		ctx.fillStyle = getCurrentGradient();
-		drawBox(y, x);
-	    }
-	}
+  // draw the boxes
+  for (y = 0; y < rows; y++) {
+    for (x = 0; x < columns; x++) {
+      if (grid[y][x] == 1) {
+        ctx.fillStyle = getCurrentGradient();
+        drawBox(y, x);
+      }
     }
+  }
+  drawGrid();
 }
 
 function drawGrid() {
@@ -321,18 +343,18 @@ function drawGrid() {
     ctx.lineWidth = 1;
     // draw the grid
     for (y = 1; y < rows; y++) {
-	var lineY = getCanvasCoords(y, 0)[0];
-	ctx.beginPath();
-	ctx.moveTo(-10, lineY);
-	ctx.lineTo(width + 10, lineY);
-	ctx.stroke();
+    	var lineY = getCanvasCoords(y, 0)[0];
+    	ctx.beginPath();
+    	ctx.moveTo(-9.5, lineY+0.5);
+    	ctx.lineTo(width + 10.5, lineY+0.5);
+    	ctx.stroke();
     }
-    for (x = 1; x < columns*2; x++) {
-	var lineX = getCanvasCoords(0, x)[1];
-	ctx.beginPath();
-	ctx.moveTo(lineX, -10);
-	ctx.lineTo(lineX, height + 10);
-	ctx.stroke();
+    for (x = 1; x < columns; x++) {
+    	var lineX = getCanvasCoords(0, x)[1];
+    	ctx.beginPath();
+    	ctx.moveTo(lineX+0.5, -9.5);
+    	ctx.lineTo(lineX+0.5, height+10.5);
+    	ctx.stroke();
     }
 
 
@@ -346,7 +368,7 @@ var eventOver = [
     [G,G,G,G,_,G,G,G,G,_,G,_,_,_,G,G,_,_,_,G,_,_,G,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,G],
     [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_],
     [G,_,_,G,_,G,_,_,G,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G]
-]
+];
 
 
 
@@ -379,7 +401,6 @@ function main() {
   	if (updateGrid()) {
   	    ctx.clearRect(-10, -10, width + 10, height + 10);
   	    drawNumbers();
-  	    // drawGrid();
   	}
   	setTimeout(function() { main(); }, 300);
   }
@@ -389,3 +410,15 @@ function main() {
   Runs above code
  */
 main();
+
+
+
+
+
+
+
+
+
+
+
+

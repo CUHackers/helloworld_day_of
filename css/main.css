@@ -2,8 +2,16 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:40:42
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-05 15:54:25
+* @Last Modified time: 2018-10-08 11:43:39
 */
 #clock {
 	border: 2px solid white;
+	margin: 0 auto;
+}
+
+canvas {
+	width: 100%;
+	height: auto;
+	max-height: 20vw;
+	max-width: 1000px;
 }
