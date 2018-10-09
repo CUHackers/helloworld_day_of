@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-08 12:01:46
+* @Last Modified time: 2018-10-09 13:32:44
 */
 var startTime = (new Date(2018, 9, 13, 8)).getTime();
 var endTime = (new Date(2018, 9, 13, 20)).getTime();
@@ -75,8 +75,8 @@ function getCurrentGradient() {
   	gridTextGradient.addColorStop(1, "#01a"); // make this a darker one!
   }
   else if (progress.during()) {
-  	gridTextGradient.addColorStop(0, "#e70000"); // old color here!
-  	gridTextGradient.addColorStop(1, "#a00"); // make this a darker one!
+  	gridTextGradient.addColorStop(0, "#FDB92E"); // old color here!
+  	gridTextGradient.addColorStop(1, "#FDB92E"); // make this a darker one!
   }
   else {
   	gridTextGradient.addColorStop(0, "#711ed6"); // old color here!
@@ -90,16 +90,18 @@ function getCurrentGradient() {
 // First object controls the number/size of each digit
 // Blank spaces between digits/sides
 var digit;
+var space;
 if (progress.during())
 {
   digit = { count: 6, pairs: 3, width: 3, height: 5 };
+  space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
 }
 else 
 {
   digit = { count: 8, pairs: 4, width: 3, height: 5 };
+  space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
 }
 
-var space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
 // Set height of canvas grid in rows
 var rows = space.topBottom * 2 + digit.height;
 // Set width of canvas grid in columns
