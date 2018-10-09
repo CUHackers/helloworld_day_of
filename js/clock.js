@@ -2,12 +2,12 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 19:45:56
+* @Last Modified time: 2018-10-09 19:46:39
 */
 
 const year = 2018;
 const month = 9;
-const day = 9;
+const day = 13;
 const eventStartTime = 8;
 const eventEndTime = 20;
 
