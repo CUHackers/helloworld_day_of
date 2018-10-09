@@ -2,15 +2,15 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:40:42
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 18:56:34
+* @Last Modified time: 2018-10-09 19:15:27
 */
 #memo {
 	color: #FDB92E;
 	transition: all 2s ease;
+	margin-bottom: -10px;
 }
 
 #clock {
-	border: 2px solid white;
 	width: 100%;
 	height: auto;
 	max-height: 18vw;

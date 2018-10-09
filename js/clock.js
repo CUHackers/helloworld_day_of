@@ -2,14 +2,17 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 18:50:02
+* @Last Modified time: 2018-10-09 19:45:56
 */
 
+const year = 2018;
 const month = 9;
 const day = 9;
+const eventStartTime = 8;
+const eventEndTime = 20;
 
-var startTime = (new Date(2018, month, day, 8)).getTime();
-var endTime = (new Date(2018, month, day, 20)).getTime();
+var startTime = (new Date(year, month, day, eventStartTime)).getTime();
+var endTime = (new Date(year, month, day, eventEndTime)).getTime();
 
 
  // for testinvar endTime = (new Date(2018, 9, 13, 20)).getTime();
@@ -98,13 +101,12 @@ if (progress.during())
 // First object controls the number/size of each digit
 // Blank spaces between digits/sides
 var digit, space;
-
 if (progress.during())
 {
   digit = { count: 6, pairs: 3, width: 3, height: 5 };
   space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
 }
-else 
+else
 {
   digit = { count: 8, pairs: 4, width: 3, height: 5 };
   space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
@@ -118,12 +120,16 @@ if (progress.during())
 {
   columns = 27;
 }
-else
+else if (progress.before())
 {
   columns = space.sides * 2
     + digit.count * digit.width // added size by digits
     + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
     + digit.pairs * space.inBetweenDigits; // space between numbers in pair
+}
+else
+{
+  columns = 43;
 }
 
   
@@ -382,14 +388,21 @@ function drawGrid() {
 
 
 // Event Has Ended!
-var eventOver = [
-    [G,_,_,G,_,_,G,G,_,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G],
-    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,G,_,G,_,G,_,_,_,G],
-    [G,G,G,G,_,G,G,G,G,_,G,_,_,_,G,G,_,_,_,G,_,_,G,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,G],
-    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_],
-    [G,_,_,G,_,G,_,_,G,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G]
-];
+// var eventOver = [
+//     [G,_,_,G,_,_,G,G,_,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G],
+//     [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,G,_,G,_,G,_,_,_,G],
+//     [G,G,G,G,_,G,G,G,G,_,G,_,_,_,G,G,_,_,_,G,_,_,G,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,G],
+//     [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_],
+//     [G,_,_,G,_,G,_,_,G,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G]
+// ];
 
+var eventOver = [
+    [G,G,G,_,_,G,_,_,G,_,G,G,G,G,_,_,G,_,G,_,G,_,_,G,G,_,_,G,G,G,G,_,G,_,_,_,_,G,G,G,_,_,G],
+    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,_,_,G,_,G,_,G,_,G,_,_,G,_,G,_,_,G,_,G,_,_,_,_,G,_,G,G,_,G],
+    [G,G,G,_,_,G,G,G,G,_,G,G,G,G,_,_,G,_,G,_,G,_,G,_,_,G,_,G,G,G,_,_,G,_,_,_,_,G,_,_,G,_,G],
+    [G,_,_,G,_,_,_,_,G,_,G,_,_,_,_,_,G,_,G,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_,G,_,G,G,_,_],
+    [G,G,G,_,_,G,G,G,G,_,G,G,G,G,_,_,G,G,G,G,G,_,_,G,G,_,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,_,G]
+];
 
 
 function staticDrawEnd() {

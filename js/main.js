@@ -2,11 +2,11 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 19:03:30
+* @Last Modified time: 2018-10-09 19:29:36
 */
 
-var startTime = (new Date(2018, month, day, 8)).getTime();
-var endTime = (new Date(2018, month, day, 20)).getTime();
+var startTime = (new Date(year, month, day, eventStartTime)).getTime();
+var endTime = (new Date(year, month, day, eventEndTime)).getTime();
 
 const schedule = [
   {
@@ -26,17 +26,17 @@ const schedule = [
   },
   {
     event: "Lunch",
-    start: new Date(2018, month, day, 10),
-    end: new Date(2018, month, day, 15, 30),
+    start: new Date(2018, month, day, 19),
+    end: new Date(2018, month, day, 21, 30),
   },
   {
     event: "Bathroom Break",
     start: new Date(2018, month, day, 18),
-    end: new Date(2018, month, day, 19),
+    end: new Date(2018, month, day, 22, 30),
   },
   {
     event: "Bedtime",
-    start: new Date(2018, month, day, 19),
+    start: new Date(2018, month, day, 21),
     end: new Date(2018, month, day, 23),
   },
 ];
@@ -68,15 +68,15 @@ function set_memo()
   const memo = document.getElementById("memo");
 	if (progress.before())
 	{
-		memo.innerHTML = "<h1>HelloWorld is loading...</h1>";
+		memo.innerHTML = "<h1><strong>HelloWorld is loading...</strong></h1>";
 	}
 	else if (progress.during())
 	{
-		memo.innerHTML = "<h1>Countdown to demos</h1>";
+		memo.innerHTML = "<h1><strong>Countdown to demos</strong></h1>";
 	}
 	else
 	{
-		memo.innerHTML = "";
+		memo.innerHTML = "<h1><strong>You done good kid.</strong></h1>";
 	}
 }
 
@@ -149,8 +149,8 @@ function set_upcoming()
         `<div class="row align-items-center"> \
           <div class="col-xs-2"></div> \
           <div class="col-xs-8 upcoming_event"> \
-            <h3 class="event_title"><strong>${schedule[i].event}</strong></h3> \
-            <h5>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h5> \
+            <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
+            <h4>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
           </div> \
         </div>`;
       }
@@ -172,6 +172,7 @@ function main() {
   set_events();
   set_upcoming();
   if (progress.after()) {
+    console.log("HEREERERE");
   	ctx.clearRect(-10, -10, width + 10, height + 10);
   	staticDrawEnd();
   } else {
