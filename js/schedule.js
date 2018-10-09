@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-09 13:33:02
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 13:36:43
+* @Last Modified time: 2018-10-09 18:29:26
 */
 const schedule = [
   {
@@ -30,6 +30,9 @@ const schedule = [
     start: new Date(2018, month, day, 18),
     end: new Date(2018, month, day, 19),
   },
+  {
+    event: "Bedtime",
+    start: new Date(2018, month, day, 17),
+    end: new Date(2018, month, day, 23),
+  },
 ];
-
-export default schedule;

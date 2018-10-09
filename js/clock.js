@@ -2,10 +2,14 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 13:32:44
+* @Last Modified time: 2018-10-09 18:50:02
 */
-var startTime = (new Date(2018, 9, 13, 8)).getTime();
-var endTime = (new Date(2018, 9, 13, 20)).getTime();
+
+const month = 9;
+const day = 9;
+
+var startTime = (new Date(2018, month, day, 8)).getTime();
+var endTime = (new Date(2018, month, day, 20)).getTime();
 
 
  // for testinvar endTime = (new Date(2018, 9, 13, 20)).getTime();
@@ -86,11 +90,15 @@ function getCurrentGradient() {
   return gridTextGradient;
 }
 
+if (progress.during())
+{
+  console.log("DURING");
+}
 
 // First object controls the number/size of each digit
 // Blank spaces between digits/sides
-var digit;
-var space;
+var digit, space;
+
 if (progress.during())
 {
   digit = { count: 6, pairs: 3, width: 3, height: 5 };
@@ -105,10 +113,20 @@ else
 // Set height of canvas grid in rows
 var rows = space.topBottom * 2 + digit.height;
 // Set width of canvas grid in columns
-var columns = space.sides * 2
+var columns;
+if (progress.during())
+{
+  columns = 27;
+}
+else
+{
+  columns = space.sides * 2
     + digit.count * digit.width // added size by digits
     + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
     + digit.pairs * space.inBetweenDigits; // space between numbers in pair
+}
+
+  
 
 // grid state [y, x] for consistency
 var grid = [], y, x;

@@ -2,10 +2,8 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 14:01:16
+* @Last Modified time: 2018-10-09 19:03:30
 */
-const day = 13;
-const month = 9;
 
 var startTime = (new Date(2018, month, day, 8)).getTime();
 var endTime = (new Date(2018, month, day, 20)).getTime();
@@ -32,9 +30,14 @@ const schedule = [
     end: new Date(2018, month, day, 15, 30),
   },
   {
-    event: "Dinner",
+    event: "Bathroom Break",
     start: new Date(2018, month, day, 18),
     end: new Date(2018, month, day, 19),
+  },
+  {
+    event: "Bedtime",
+    start: new Date(2018, month, day, 19),
+    end: new Date(2018, month, day, 23),
   },
 ];
 
@@ -112,7 +115,7 @@ function set_events()
         `<div class="row align-items-center"> \
           <div class="col-xs-2"></div> \
           <div class="col-xs-8 event"> \
-            <h1 class="event_title">${schedule[i].event}</h1> \
+            <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
             <h4>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
           </div> \
         </div>`;
@@ -146,8 +149,8 @@ function set_upcoming()
         `<div class="row align-items-center"> \
           <div class="col-xs-2"></div> \
           <div class="col-xs-8 upcoming_event"> \
-            <h1 class="event_title">${schedule[i].event}</h1> \
-            <h4>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
+            <h3 class="event_title"><strong>${schedule[i].event}</strong></h3> \
+            <h5>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h5> \
           </div> \
         </div>`;
       }
