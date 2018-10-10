@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-10 14:34:09
+* @Last Modified time: 2018-10-10 15:05:54
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -10,34 +10,64 @@
 
 const schedule = [
   {
+    event: "HowToMentor",
+    start: new Date(2018, month, day, 7, 30),
+    end: new Date(2018, month, day, 8, 15),
+  },
+  {
     event: "Breakfast",
     start: new Date(2018, month, day, 7, 30),
     end: new Date(2018, month, day, 9, 30),
   },
   {
-    event: "Idea Jam",
-    start: new Date(2018, month, day, 7, 30),
-    end: new Date(2018, month, day, 9, 30),
+    event: "Registration",
+    start: new Date(2018, month, day, 8),
+    end: new Date(2018, month, day, 9),
   },
   {
     event: "Opening",
-    start: new Date(2018, month, day, 14, 30),
-    end: new Date(2018, month, day, 18),
+    start: new Date(2018, month, day, 8, 30),
+    end: new Date(2018, month, day, 9),
   },
   {
     event: "Lunch",
-    start: new Date(2018, month, day, 19),
-    end: new Date(2018, month, day, 21, 30),
+    start: new Date(2018, month, day, 12),
+    end: new Date(2018, month, day, 13, 30),
   },
   {
-    event: "Bathroom Break",
+    event: "Cup Stacking",
+    start: new Date(2018, month, day, 14),
+    end: new Date(2018, month, day, 15),
+  },
+  {
+    event: "Virtual Reality",
+    start: new Date(2018, month, day, 15),
+    end: new Date(2018, month, day, 17),
+  },
+  {
+    event: "Dinner",
+    start: new Date(2018, month, day, 17, 30),
+    end: new Date(2018, month, day, 18, 30),
+  },
+  {
+    event: "Demo Setup",
     start: new Date(2018, month, day, 18),
-    end: new Date(2018, month, day, 22, 30),
+    end: new Date(2018, month, day, 18, 30),
   },
   {
-    event: "Bedtime",
-    start: new Date(2018, month, day, 21),
-    end: new Date(2018, month, day, 23),
+    event: "Demos",
+    start: new Date(2018, month, day, 18, 30),
+    end: new Date(2018, month, day, 19),
+  },
+  {
+    event: "Closing",
+    start: new Date(2018, month, day, 19, 30),
+    end: new Date(2018, month, day, 20),
+  },
+  {
+    event: "Goodbye",
+    start: new Date(2018, month, day, 20),
+    end: new Date(2018, month, day, 21),
   },
 ];
 
@@ -133,7 +163,7 @@ function set_upcoming()
     for (var i = 0; i < schedule.length; i++)
     {
       if (
-        (schedule[i].start - currentTime()) / 3600000 < 3600000
+        (schedule[i].start - currentTime()) / 3600000 < 1
         && schedule[i].start - currentTime() > 0) 
       {
         html_string += 
