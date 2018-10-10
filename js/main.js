@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-10 15:05:54
+* @Last Modified time: 2018-10-10 15:09:11
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -163,6 +163,7 @@ function set_upcoming()
     for (var i = 0; i < schedule.length; i++)
     {
       if (
+        // If an event is less than an hour away, update screen
         (schedule[i].start - currentTime()) / 3600000 < 1
         && schedule[i].start - currentTime() > 0) 
       {

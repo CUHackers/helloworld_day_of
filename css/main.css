@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:40:42
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-10 14:39:21
+* @Last Modified time: 2018-10-10 15:13:58
 */
 #memo {
 	color: #FDB92E;
@@ -12,8 +12,7 @@
 
 #clock {
 	width: 100%;
-	height: auto;
-	max-height: 16vw;
+	height: 20vw;
 }
 
 .event {
