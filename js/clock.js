@@ -2,10 +2,19 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-08 12:01:46
+* @Last Modified time: 2018-10-10 14:51:59
 */
-var startTime = (new Date(2018, 9, 13, 8)).getTime();
-var endTime = (new Date(2018, 9, 13, 20)).getTime();
+
+const year = 2018;
+const month = 9;
+const day = 13;
+const eventStartTime = 8;
+const eventEndTime = 20;
+const eventStartMinutes = 0;
+const eventEndMinutes = 0;
+
+var startTime = (new Date(year, month, day, eventStartTime)).getTime();
+var endTime = (new Date(year, month, day, eventEndTime)).getTime();
 
 
  // for testinvar endTime = (new Date(2018, 9, 13, 20)).getTime();
@@ -18,7 +27,7 @@ var endTime = (new Date(2018, 9, 13, 20)).getTime();
   Return: integer, milliseconds since the epoch
  */
 function currentTime() {
-    return (new Date()).getTime();
+  return (new Date()).getTime();
 }
 
 // Object containing boolean key:value pairs concerning event progress
@@ -75,8 +84,8 @@ function getCurrentGradient() {
   	gridTextGradient.addColorStop(1, "#01a"); // make this a darker one!
   }
   else if (progress.during()) {
-  	gridTextGradient.addColorStop(0, "#e70000"); // old color here!
-  	gridTextGradient.addColorStop(1, "#a00"); // make this a darker one!
+  	gridTextGradient.addColorStop(0, "#FDB92E"); // old color here!
+  	gridTextGradient.addColorStop(1, "#FDB92E"); // make this a darker one!
   }
   else {
   	gridTextGradient.addColorStop(0, "#711ed6"); // old color here!
@@ -89,24 +98,64 @@ function getCurrentGradient() {
 
 // First object controls the number/size of each digit
 // Blank spaces between digits/sides
-var digit;
-if (progress.during())
+function get_digit()
 {
-  digit = { count: 6, pairs: 3, width: 3, height: 5 };
+  var digit;
+  if (progress.during())
+  {
+    digit = { count: 6, pairs: 3, width: 3, height: 5 };
+  }
+  else
+  {
+    digit = { count: 8, pairs: 4, width: 3, height: 5 };
+  }
+  return digit;
 }
-else 
-{
-  digit = { count: 8, pairs: 4, width: 3, height: 5 };
-}
+digit = get_digit();
 
-var space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+function get_space()
+{
+  var space;
+  if (progress.during())
+  {
+    space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+  }
+  else
+  {
+    space = { sides: 0, topBottom: 1, inBetweenPairs: 2, inBetweenDigits: 1 };
+  }
+  return space;
+}
+space = get_space();
+
 // Set height of canvas grid in rows
 var rows = space.topBottom * 2 + digit.height;
 // Set width of canvas grid in columns
-var columns = space.sides * 2
-    + digit.count * digit.width // added size by digits
-    + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
-    + digit.pairs * space.inBetweenDigits; // space between numbers in pair
+
+var columns;
+function get_columns()
+{
+  var columns;
+  if (progress.during())
+  {
+    columns = 27;
+  }
+  else if (progress.before())
+  {
+    columns = space.sides * 2
+      + digit.count * digit.width // added size by digits
+      + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
+      + digit.pairs * space.inBetweenDigits; // space between numbers in pair
+  }
+  else
+  {
+    columns = 43;
+  }
+  return columns;
+}
+  
+// Set columns for page load
+columns = get_columns();
 
 // grid state [y, x] for consistency
 var grid = [], y, x;
@@ -233,10 +282,10 @@ const digits = [zero, one, two, three, four, five, six, seven, eight, nine];
  */
 function secondsLeft() {
     if (progress.before()) {
-      return Math.floor((startTime -  (new Date().getTime())) / 1000);
+      return Math.floor((startTime -  currentTime()) / 1000);
     }
     else if (progress.during()) {
-      return Math.floor((endTime - (new Date().getTime())) / 1000);
+      return Math.floor((endTime - currentTime()) / 1000);
     }
     else {
       throw new Error("This shouldn't be happening!!!");
@@ -362,14 +411,21 @@ function drawGrid() {
 
 
 // Event Has Ended!
-var eventOver = [
-    [G,_,_,G,_,_,G,G,_,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G],
-    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,G,_,G,_,G,_,_,_,G],
-    [G,G,G,G,_,G,G,G,G,_,G,_,_,_,G,G,_,_,_,G,_,_,G,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,G],
-    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_],
-    [G,_,_,G,_,G,_,_,G,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G]
-];
+// var eventOver = [
+//     [G,_,_,G,_,_,G,G,_,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G],
+//     [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,G,_,G,_,G,_,_,_,G],
+//     [G,G,G,G,_,G,G,G,G,_,G,_,_,_,G,G,_,_,_,G,_,_,G,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,G],
+//     [G,_,_,G,_,G,_,_,G,_,G,_,_,_,G,_,G,_,_,G,_,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_],
+//     [G,_,_,G,_,G,_,_,G,_,_,G,G,_,G,_,G,_,_,G,G,G,_,_,_,G,G,_,_,G,_,_,G,_,G,G,G,_,G]
+// ];
 
+var eventOver = [
+    [G,G,G,_,_,G,_,_,G,_,G,G,G,G,_,_,G,_,G,_,G,_,_,G,G,_,_,G,G,G,G,_,G,_,_,_,_,G,G,G,_,_,G],
+    [G,_,_,G,_,G,_,_,G,_,G,_,_,_,_,_,G,_,G,_,G,_,G,_,_,G,_,G,_,_,G,_,G,_,_,_,_,G,_,G,G,_,G],
+    [G,G,G,_,_,G,G,G,G,_,G,G,G,G,_,_,G,_,G,_,G,_,G,_,_,G,_,G,G,G,_,_,G,_,_,_,_,G,_,_,G,_,G],
+    [G,_,_,G,_,_,_,_,G,_,G,_,_,_,_,_,G,_,G,_,G,_,G,_,_,G,_,G,_,G,G,_,G,_,_,_,_,G,_,G,G,_,_],
+    [G,G,G,_,_,G,G,G,G,_,G,G,G,G,_,_,G,G,G,G,G,_,_,G,G,_,_,G,_,_,G,_,G,G,G,G,_,G,G,G,_,_,G]
+];
 
 
 function staticDrawEnd() {

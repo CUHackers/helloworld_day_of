@@ -2,20 +2,39 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:40:42
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-08 11:59:07
+* @Last Modified time: 2018-10-10 14:39:21
 */
 #memo {
+	color: #FDB92E;
 	transition: all 2s ease;
+	margin-bottom: -10px;
 }
 
 #clock {
-	border: 2px solid white;
-	margin: 0 auto;
-}
-
-canvas {
 	width: 100%;
 	height: auto;
-	max-height: 20vw;
-	max-width: 1000px;
+	max-height: 16vw;
+}
+
+.event {
+	align-items: flex-end;
+	background-color: #287767;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.event_title {
+	margin: auto 0;
+	padding: 5px;
+}
+
+.upcoming_event {
+	background-color: #99BFB8;
+	align-items: flex-end;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
 }

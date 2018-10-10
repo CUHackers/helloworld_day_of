@@ -15,37 +15,43 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="css/main.css">
 
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> -->
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112858061-1"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112858061-1"></script> -->
 
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div id="memo" class="col-8">
-<!--<h1>EVENTS ONGOING</h1> -->       
+      <div class="row  align-items-center">
+        <div class="col-xs-2"></div>
+        <div id="memo" class="col-xs-8">
+          <!--Javascript will fill this with applicable objects-->      
         </div>
       </div>
     	<div class="row align-items-center">
-        <div class="col" align="center">
+        <div class="col-xs-2"></div>
+        <div id="clockContainer" class="col-xs-8" align="center">
   		    <canvas id="clock" ></canvas>
         </div>
       </div>
-      <div class="row align-items-center">
-        <div class="col-8" align="center">
-          <img 
-            src="./resources/HelloWorld_color_logo.svg" 
-            alt="HelloWorld"/>
-        </div>
+      <div id="events">
+        <!--Javascript will fill this with applicable objects-->
+      </div>
+      <div id="upcoming">
+        <!--Javascript will fill this with applicable objects-->
       </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <script src="./js/clock.js"></script>
     <script src="./js/main.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
