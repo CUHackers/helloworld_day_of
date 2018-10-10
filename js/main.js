@@ -2,11 +2,11 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 19:29:36
+* @Last Modified time: 2018-10-10 14:34:09
 */
 
-var startTime = (new Date(year, month, day, eventStartTime)).getTime();
-var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+// var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
+// var endTime = (new Date(year, month, day, eventEndTime)).getTime();
 
 const schedule = [
   {
@@ -41,14 +41,6 @@ const schedule = [
   },
 ];
 
-/*
-  Gets the number of milliseconds since 1/1/1970
-
-  Return: integer, milliseconds since the epoch
- */
-function currentTime() {
-    return (new Date()).getTime();
-}
 
 // Object containing boolean key:value pairs concerning event progress
 var progress = {
@@ -108,8 +100,8 @@ function set_events()
     for (var i = 0; i < schedule.length; i++)
     {
       if (
-        new Date().getTime() >= schedule[i].start 
-        && new Date().getTime() <= schedule[i].end)
+        currentTime() >= schedule[i].start 
+        && currentTime() <= schedule[i].end)
       {
         html_string += 
         `<div class="row align-items-center"> \
@@ -128,7 +120,6 @@ function set_events()
   }
 
   document.getElementById("events").innerHTML = html_string;
-  console.log(events.innerHtml);
 }
 
 function set_upcoming()
@@ -142,8 +133,8 @@ function set_upcoming()
     for (var i = 0; i < schedule.length; i++)
     {
       if (
-        (schedule[i].start - new Date().getTime()) / 3600000 < 3600000
-        && schedule[i].start - new Date().getTime() > 0) 
+        (schedule[i].start - currentTime()) / 3600000 < 3600000
+        && schedule[i].start - currentTime() > 0) 
       {
         html_string += 
         `<div class="row align-items-center"> \
@@ -162,17 +153,21 @@ function set_upcoming()
   }
 
   document.getElementById("upcoming").innerHTML = html_string;
-  console.log(upcoming.innerHtml);
 }
 
 
-
+var before, during, after;
 function main() {
 	set_memo();
   set_events();
   set_upcoming();
+  columns = get_columns();
+  space = get_space();
+  digit = get_digit();
+
+  
+
   if (progress.after()) {
-    console.log("HEREERERE");
   	ctx.clearRect(-10, -10, width + 10, height + 10);
   	staticDrawEnd();
   } else {
@@ -180,7 +175,17 @@ function main() {
   	    ctx.clearRect(-10, -10, width + 10, height + 10);
   	    drawNumbers();
   	}
+    // drawGrid();
   	setTimeout(function() { main(); }, 300);
+  }
+  if (startTime - currentTime() > -1000 && startTime - currentTime() < 0)
+  {
+    window.location.reload(false);
+  }
+
+  if (endTime - currentTime() > -1000 && endTime - currentTime() < 0)
+  {
+    window.location.reload(false);
   }
 }
 

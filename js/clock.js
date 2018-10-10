@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-09 19:46:39
+* @Last Modified time: 2018-10-10 14:36:34
 */
 
 const year = 2018;
@@ -10,9 +10,11 @@ const month = 9;
 const day = 13;
 const eventStartTime = 8;
 const eventEndTime = 20;
+const eventStartMinutes = 0;
+const eventEndMinutes = 0;
 
-var startTime = (new Date(year, month, day, eventStartTime)).getTime();
-var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
+var endTime = (new Date(year, month, day, eventEndTime, eventEndMinutes)).getTime();
 
 
  // for testinvar endTime = (new Date(2018, 9, 13, 20)).getTime();
@@ -25,7 +27,7 @@ var endTime = (new Date(year, month, day, eventEndTime)).getTime();
   Return: integer, milliseconds since the epoch
  */
 function currentTime() {
-    return (new Date()).getTime();
+  return (new Date()).getTime();
 }
 
 // Object containing boolean key:value pairs concerning event progress
@@ -93,46 +95,67 @@ function getCurrentGradient() {
   return gridTextGradient;
 }
 
-if (progress.during())
-{
-  console.log("DURING");
-}
 
 // First object controls the number/size of each digit
 // Blank spaces between digits/sides
-var digit, space;
-if (progress.during())
+function get_digit()
 {
-  digit = { count: 6, pairs: 3, width: 3, height: 5 };
-  space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+  var digit;
+  if (progress.during())
+  {
+    digit = { count: 6, pairs: 3, width: 3, height: 5 };
+  }
+  else
+  {
+    digit = { count: 8, pairs: 4, width: 3, height: 5 };
+  }
+  return digit;
 }
-else
+digit = get_digit();
+
+function get_space()
 {
-  digit = { count: 8, pairs: 4, width: 3, height: 5 };
-  space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+  var space;
+  if (progress.during())
+  {
+    space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+  }
+  else
+  {
+    space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+  }
+  return space;
 }
+space = get_space();
 
 // Set height of canvas grid in rows
 var rows = space.topBottom * 2 + digit.height;
 // Set width of canvas grid in columns
-var columns;
-if (progress.during())
-{
-  columns = 27;
-}
-else if (progress.before())
-{
-  columns = space.sides * 2
-    + digit.count * digit.width // added size by digits
-    + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
-    + digit.pairs * space.inBetweenDigits; // space between numbers in pair
-}
-else
-{
-  columns = 43;
-}
 
+var columns;
+function get_columns()
+{
+  var columns;
+  if (progress.during())
+  {
+    columns = 27;
+  }
+  else if (progress.before())
+  {
+    columns = space.sides * 2
+      + digit.count * digit.width // added size by digits
+      + (digit.pairs - 1) * space.inBetweenPairs // space between individual pairs of numbers
+      + digit.pairs * space.inBetweenDigits; // space between numbers in pair
+  }
+  else
+  {
+    columns = 43;
+  }
+  return columns;
+}
   
+// Set columns for page load
+columns = get_columns();
 
 // grid state [y, x] for consistency
 var grid = [], y, x;
@@ -259,10 +282,10 @@ const digits = [zero, one, two, three, four, five, six, seven, eight, nine];
  */
 function secondsLeft() {
     if (progress.before()) {
-      return Math.floor((startTime -  (new Date().getTime())) / 1000);
+      return Math.floor((startTime -  currentTime()) / 1000);
     }
     else if (progress.during()) {
-      return Math.floor((endTime - (new Date().getTime())) / 1000);
+      return Math.floor((endTime - currentTime()) / 1000);
     }
     else {
       throw new Error("This shouldn't be happening!!!");
