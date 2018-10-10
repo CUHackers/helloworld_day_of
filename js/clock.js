@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-10 14:39:52
+* @Last Modified time: 2018-10-10 14:49:48
 */
 
 const year = 2018;
@@ -122,7 +122,7 @@ function get_space()
   }
   else
   {
-    space = { sides: 1, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+    space = { sides: 1, topBottom: 1, inBetweenPairs: 2, inBetweenDigits: 1 };
   }
   return space;
 }
