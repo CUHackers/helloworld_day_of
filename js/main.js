@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-10 15:09:11
+* @Last Modified time: 2018-10-11 09:38:05
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -28,6 +28,16 @@ const schedule = [
     event: "Opening",
     start: new Date(2018, month, day, 8, 30),
     end: new Date(2018, month, day, 9),
+  },
+  {
+    event: "Dummy Event",
+    start: new Date(2018, month, day, 9, 30),
+    end: new Date(2018, month, day, 11),
+  },
+  {
+    event: "Dummy Event NO 2",
+    start: new Date(2018, month, day, 10),
+    end: new Date(2018, month, day, 11),
   },
   {
     event: "Lunch",
@@ -115,7 +125,7 @@ function set_events()
   events.innerHTML = "";
   var html_string = "";
 
-  if (progress.before())
+  if (progress.after())
   {
     html_string = 
       '<div class="col-xs-2"></div> \
@@ -125,7 +135,7 @@ function set_events()
           alt="HelloWorld"/>  \
       </div>';
   }
-  else if (progress.during())
+  else
   {
     for (var i = 0; i < schedule.length; i++)
     {
@@ -143,10 +153,18 @@ function set_events()
         </div>`;
       }
     }
-  }
-  else
-  {
-    html_string = "";
+    if (progress.before())
+    {
+      html_string += 
+        '<div class="row"> \
+        <div class="col-xs-2"></div> \
+        <div class="col-xs-8">  \
+          <img  \
+            src="./resources/HelloWorld_color_logo.svg" \
+            alt="HelloWorld"/>  \
+        </div> \
+        </div>';
+    }
   }
 
   document.getElementById("events").innerHTML = html_string;
@@ -178,16 +196,10 @@ function set_upcoming()
       }
     }
   }
-  else
-  {
-    html_string = "";
-  }
 
   document.getElementById("upcoming").innerHTML = html_string;
 }
 
-
-var before, during, after;
 function main() {
 	set_memo();
   set_events();
@@ -197,7 +209,6 @@ function main() {
   digit = get_digit();
 
   
-
   if (progress.after()) {
   	ctx.clearRect(-10, -10, width + 10, height + 10);
   	staticDrawEnd();
