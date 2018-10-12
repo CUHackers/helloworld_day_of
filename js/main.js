@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-12 11:07:35
+* @Last Modified time: 2018-10-12 11:15:29
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -147,7 +147,7 @@ function set_events()
         html_string += 
         `<div class="event"> \
             <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
-            <h4  class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours()) +":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</h4> \
+            <p  class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours()) +":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</p> \
           </div>`;
       }
     }
@@ -183,7 +183,7 @@ function set_upcoming()
         html_string += 
         `<div class="upcoming_event"> \
           <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
-          <h4 class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours())+":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</h4> \
+          <p class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours())+":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</p> \
         </div>`;
       }
     }

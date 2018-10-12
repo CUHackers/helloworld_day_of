@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:40:42
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-12 10:57:54
+* @Last Modified time: 2018-10-12 11:14:31
 */
 
 * {
@@ -36,6 +36,7 @@
 }
 
 .mem_message {
+	padding-top: 18px;
 	display: inline;
 	font-size: 56px;
 	z-index: 10;
