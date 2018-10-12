@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-12 11:21:51
+* @Last Modified time: 2018-10-12 11:28:17
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -28,16 +28,6 @@ const schedule = [
     event: "Opening",
     start: new Date(2018, month, day, 8, 30),
     end: new Date(2018, month, day, 9),
-  },
-  {
-    event: "Lunch",
-    start: new Date(2018, month, day, 11),
-    end: new Date(2018, month, day, 13, 30),
-  },
-  {
-    event: "Lunch",
-    start: new Date(2018, month, day, 12),
-    end: new Date(2018, month, day, 13, 30),
   },
   {
     event: "Lunch",
