@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-11 09:40:39
+* @Last Modified time: 2018-10-12 10:42:47
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -28,6 +28,16 @@ const schedule = [
     event: "Opening",
     start: new Date(2018, month, day, 8, 30),
     end: new Date(2018, month, day, 9),
+  },
+  {
+    event: "Registration",
+    start: new Date(2018, month, day, 10),
+    end: new Date(2018, month, day, 12),
+  },
+  {
+    event: "Registration",
+    start: new Date(2018, month, day, 11),
+    end: new Date(2018, month, day, 13),
   },
   {
     event: "Lunch",
@@ -90,15 +100,17 @@ function set_memo()
   const memo = document.getElementById("memo");
 	if (progress.before())
 	{
-		memo.innerHTML = "<h1><strong>HelloWorld is loading...</strong></h1>";
+		memo.innerHTML = "<h1 class='mem_message'><strong>HelloWorld is loading...</strong></h1>";
 	}
 	else if (progress.during())
 	{
-		memo.innerHTML = "<h1><strong>Countdown to demos</strong></h1>";
+		memo.innerHTML = "<h1 class='mem_message'><strong>Countdown to demos</strong></h1><img id='top_bug' \
+          src='./resources/HelloWorld_bw_logo.svg' \
+          alt='HelloWorld'/>";
 	}
 	else
 	{
-		memo.innerHTML = "<h1><strong>You done good kid.</strong></h1>";
+		memo.innerHTML = "<h1 class='mem_message'><strong>You done good kid.</strong></h1>";
 	}
 }
 
@@ -118,8 +130,7 @@ function set_events()
   if (progress.after())
   {
     html_string = 
-      '<div class="col-xs-2"></div> \
-      <div class="col-xs-8">  \
+      '<div>  \
         <img  \
           src="./resources/HelloWorld_color_logo.svg" \
           alt="HelloWorld"/>  \
@@ -134,26 +145,20 @@ function set_events()
         && currentTime() <= schedule[i].end)
       {
         html_string += 
-        `<div class="row align-items-center"> \
-          <div class="col-xs-2"></div> \
-          <div class="col-xs-8 event"> \
+        `<div class="event"> \
             <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
-            <h4>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
-          </div> \
-        </div>`;
+            <h4  class="event_time">${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
+          </div>`;
       }
     }
     if (progress.before())
     {
       html_string += 
-        '<div class="row"> \
-        <div class="col-xs-2"></div> \
-        <div class="col-xs-8">  \
-          <img  \
-            src="./resources/HelloWorld_color_logo.svg" \
-            alt="HelloWorld"/>  \
-        </div> \
-        </div>';
+        '<div>  \
+            <img  \
+              src="./resources/HelloWorld_color_logo.svg" \
+              alt="HelloWorld"/>  \
+          </div>';
     }
   }
 
@@ -176,12 +181,9 @@ function set_upcoming()
         && schedule[i].start - currentTime() > 0) 
       {
         html_string += 
-        `<div class="row align-items-center"> \
-          <div class="col-xs-2"></div> \
-          <div class="col-xs-8 upcoming_event"> \
-            <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
-            <h4>${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
-          </div> \
+        `<div class="upcoming_event"> \
+          <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
+          <h4 class="event_time">${schedule[i].start.getHours()%12+":"+addZero(schedule[i].start.getMinutes())}-${schedule[i].end.getHours()%12+":"+addZero(schedule[i].end.getMinutes())}</h4> \
         </div>`;
       }
     }

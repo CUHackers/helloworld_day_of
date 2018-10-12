@@ -2,12 +2,12 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-11 15:29:56
+* @Last Modified time: 2018-10-12 10:41:36
 */
 
 const year = 2018;
 const month = 9;
-const day = 11;
+const day = 12;
 const eventStartTime = 8;
 const eventEndTime = 20;
 const eventStartMinutes = 0;
@@ -113,7 +113,7 @@ function get_space()
   var space;
   if (progress.during())
   {
-    space = { sides: 0, topBottom: 1, inBetweenPairs: 3, inBetweenDigits: 1 };
+    space = { sides: 0, topBottom: 0, inBetweenPairs: 3, inBetweenDigits: 1 };
   }
   else
   {
