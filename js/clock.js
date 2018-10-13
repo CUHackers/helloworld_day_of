@@ -2,19 +2,19 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-13 07:34:15
+* @Last Modified time: 2018-10-13 11:52:30
 */
 
 const year = 2018;
 const month = 9;
 const day = 13;
 const eventStartTime = 8;
-const eventEndTime = 20;
+const eventEndTime = 18;
 const eventStartMinutes = 0;
-const eventEndMinutes = 0;
+const eventEndMinutes = 30;
 
 var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
-var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+var endTime = (new Date(year, month, day, eventEndTime, eventEndMinutes)).getTime();
 
 /*
   Gets the number of milliseconds since 1/1/1970

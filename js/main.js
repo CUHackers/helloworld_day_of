@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-13 09:25:28
+* @Last Modified time: 2018-10-13 11:52:16
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
