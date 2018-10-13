@@ -2,7 +2,7 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-13 11:52:16
+* @Last Modified time: 2018-10-13 18:13:21
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
@@ -118,7 +118,7 @@ function set_events()
   events.innerHTML = "";
   var html_string = "";
 
-  if (progress.after())
+  if (false)
   {
     html_string = 
       '<div>  \
@@ -163,7 +163,7 @@ function set_upcoming()
   upcoming.innerHTML = "";
   var html_string = "";
 
-  if (progress.during())
+  if (true)
   {
     for (var i = 0; i < schedule.length; i++)
     {
