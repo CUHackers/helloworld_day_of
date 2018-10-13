@@ -2,11 +2,12 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-12 11:28:17
+* @Last Modified time: 2018-10-13 09:25:28
 */
 
 // var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
 // var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+let count = 0;
 
 const schedule = [
   {
@@ -130,7 +131,7 @@ function set_events()
   {
     for (var i = 0; i < schedule.length; i++)
     {
-      if (
+      if ( count < 4 &&
         currentTime() >= schedule[i].start 
         && currentTime() <= schedule[i].end)
       {
@@ -139,6 +140,7 @@ function set_events()
             <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
             <p  class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours()) +":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</p> \
           </div>`;
+          count ++;
       }
     }
     if (progress.before())
@@ -165,9 +167,9 @@ function set_upcoming()
   {
     for (var i = 0; i < schedule.length; i++)
     {
-      if (
+      if ( count < 4 &&
         // If an event is less than an hour away, update screen
-        (schedule[i].start - currentTime()) / 3600000 < 1
+        (schedule[i].start - currentTime()) / 3600000 < 1000
         && schedule[i].start - currentTime() > 0) 
       {
         html_string += 
@@ -175,6 +177,7 @@ function set_upcoming()
           <h1 class="event_title"><strong>${schedule[i].event}</strong></h1> \
           <p class="event_time">${(schedule[i].start.getHours() > 12 ? schedule[i].start.getHours()%12 : schedule[i].start.getHours())+":"+addZero(schedule[i].start.getMinutes())}-${(schedule[i].end.getHours() > 12 ? schedule[i].end.getHours()%12 : schedule[i].end.getHours())+":"+addZero(schedule[i].end.getMinutes())}</p> \
         </div>`;
+        count++;
       }
     }
   }
@@ -183,6 +186,7 @@ function set_upcoming()
 }
 
 function main() {
+  count = 0;
 	set_memo();
   set_events();
   set_upcoming();
