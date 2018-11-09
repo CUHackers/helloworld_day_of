@@ -2,19 +2,27 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-05 15:34:33
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-13 18:14:46
+* @Last Modified time: 2018-11-09 10:54:41
 */
 
-const year = 2018;
-const month = 9;
-const day = 13;
-const eventStartTime = 8;
-const eventEndTime = 18;
-const eventStartMinutes = 0;
-const eventEndMinutes = 30;
+const year = new Date().getYear() + 1900;
+const month = new Date().getMonth();
+const day = new Date().getDate();
 
-var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
-var endTime = (new Date(year, month, day, eventEndTime, eventEndMinutes)).getTime();
+console.log(year);
+console.log(month);
+console.log(day);
+
+const eventStartTime = 8;
+const eventEndTime = 20;
+const eventStartMinutes = 0;
+const eventEndMinutes = 0;
+
+// var startTime = (new Date(year, month, day, eventStartTime)).getTime();
+// var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+
+console.log(new Date(year, month, day, eventStartTime, eventStartMinutes));
+console.log(new Date(year, month, day, eventEndTime, eventEndMinutes));
 
 /*
   Gets the number of milliseconds since 1/1/1970
@@ -25,19 +33,42 @@ function currentTime() {
   return (new Date()).getTime();
 }
 
+/*
+  Gets the number of milliseconds since 1/1/1970
+
+  Return: integer, milliseconds since the epoch
+ */
+function startTime() {
+  return (new Date(year, month, day, eventStartTime)).getTime();
+}
+
+/*
+  Gets the number of milliseconds since 1/1/1970
+
+  Return: integer, milliseconds since the epoch
+ */
+function endTime() {
+  return (new Date(year, month, day, eventEndTime)).getTime();
+}
+
+
+
 // Object containing boolean key:value pairs concerning event progress
 var progress = {
     before: function () {
-      return currentTime() < startTime;
+      return currentTime() < startTime();
     },
     during: function () {
-      return startTime <= currentTime() && currentTime() < endTime;
+      return startTime() <= currentTime() && currentTime() < endTime();
     },
     after: function () {
-      return endTime <= currentTime();
+      return endTime() <= currentTime();
     }
 };
 
+console.log(startTime());
+console.log(currentTime());
+console.log(endTime());
 
 // Log the current relation to the event
 if (progress.before()) {
@@ -277,10 +308,10 @@ const digits = [zero, one, two, three, four, five, six, seven, eight, nine];
  */
 function secondsLeft() {
     if (progress.before()) {
-      return Math.floor((startTime -  currentTime()) / 1000);
+      return Math.floor((startTime() -  currentTime()) / 1000);
     }
     else if (progress.during()) {
-      return Math.floor((endTime - currentTime()) / 1000);
+      return Math.floor((endTime() - currentTime()) / 1000);
     }
     else {
       throw new Error("This shouldn't be happening!!!");

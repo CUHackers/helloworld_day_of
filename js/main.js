@@ -2,73 +2,73 @@
 * @Author: Charlie Gallentine
 * @Date:   2018-10-08 11:50:43
 * @Last Modified by:   Charlie Gallentine
-* @Last Modified time: 2018-10-13 18:13:21
+* @Last Modified time: 2018-11-09 10:52:07
 */
 
-// var startTime = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
-// var endTime = (new Date(year, month, day, eventEndTime)).getTime();
+// var startTime() = (new Date(year, month, day, eventStartTime, eventStartMinutes)).getTime();
+// var endTime() = (new Date(year, month, day, eventEndTime)).getTime();
 let count = 0;
 
 const schedule = [
   {
     event: "HowToMentor",
-    start: new Date(2018, month, day, 7, 30),
-    end: new Date(2018, month, day, 8, 15),
+    start: new Date(year, month, day, 7, 30),
+    end: new Date(year, month, day, 8, 15),
   },
   {
     event: "Breakfast",
-    start: new Date(2018, month, day, 7, 30),
-    end: new Date(2018, month, day, 9, 30),
+    start: new Date(year, month, day, 7, 30),
+    end: new Date(year, month, day, 9, 30),
   },
   {
     event: "Registration",
-    start: new Date(2018, month, day, 8),
-    end: new Date(2018, month, day, 9),
+    start: new Date(year, month, day, 8),
+    end: new Date(year, month, day, 9),
   },
   {
     event: "Opening",
-    start: new Date(2018, month, day, 8, 30),
-    end: new Date(2018, month, day, 9),
+    start: new Date(year, month, day, 8, 30),
+    end: new Date(year, month, day, 9),
   },
   {
     event: "Lunch",
-    start: new Date(2018, month, day, 12),
-    end: new Date(2018, month, day, 13, 30),
+    start: new Date(year, month, day, 12),
+    end: new Date(year, month, day, 13, 30),
   },
   {
     event: "Cup Stacking",
-    start: new Date(2018, month, day, 14),
-    end: new Date(2018, month, day, 15),
+    start: new Date(year, month, day, 14),
+    end: new Date(year, month, day, 15),
   },
   {
     event: "Virtual Reality",
-    start: new Date(2018, month, day, 15),
-    end: new Date(2018, month, day, 17),
+    start: new Date(year, month, day, 15),
+    end: new Date(year, month, day, 17),
   },
   {
     event: "Dinner",
-    start: new Date(2018, month, day, 17, 30),
-    end: new Date(2018, month, day, 18, 30),
+    start: new Date(year, month, day, 17, 30),
+    end: new Date(year, month, day, 18, 30),
   },
   {
     event: "Demo Setup",
-    start: new Date(2018, month, day, 18),
-    end: new Date(2018, month, day, 18, 30),
+    start: new Date(year, month, day, 18),
+    end: new Date(year, month, day, 18, 30),
   },
   {
     event: "Demos",
-    start: new Date(2018, month, day, 18, 30),
-    end: new Date(2018, month, day, 19),
+    start: new Date(year, month, day, 18, 30),
+    end: new Date(year, month, day, 19),
   },
   {
     event: "Closing",
-    start: new Date(2018, month, day, 19, 30),
-    end: new Date(2018, month, day, 20),
+    start: new Date(year, month, day, 19, 30),
+    end: new Date(year, month, day, 20),
   },
   {
     event: "Goodbye",
-    start: new Date(2018, month, day, 20),
-    end: new Date(2018, month, day, 21),
+    start: new Date(year, month, day, 20),
+    end: new Date(year, month, day, 21),
   },
 ];
 
@@ -76,13 +76,13 @@ const schedule = [
 // Object containing boolean key:value pairs concerning event progress
 var progress = {
     before: function () {
-      return currentTime() < startTime;
+      return currentTime() < startTime();
     },
     during: function () {
-      return startTime <= currentTime() && currentTime() < endTime;
+      return startTime() <= currentTime() && currentTime() < endTime();
     },
     after: function () {
-      return endTime <= currentTime();
+      return endTime() <= currentTime();
     }
 };
 
@@ -206,12 +206,12 @@ function main() {
     // drawGrid();
   	setTimeout(function() { main(); }, 300);
   }
-  if (startTime - currentTime() > -1000 && startTime - currentTime() < 0)
+  if (startTime() - currentTime() > -1000 && startTime() - currentTime() < 0)
   {
     window.location.reload(false);
   }
 
-  if (endTime - currentTime() > -1000 && endTime - currentTime() < 0)
+  if (endTime() - currentTime() > -1000 && endTime() - currentTime() < 0)
   {
     window.location.reload(false);
   }
